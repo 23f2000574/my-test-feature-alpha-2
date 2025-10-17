@@ -3,54 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Button Interaction Demo</title>
+    <title>Interactive Buttons Demo</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
-            background-color: #f0f2f5;
+            background-color: #f4f4f9;
         }
-        #actionButton {
-            padding: 15px 30px;
-            font-size: 18px;
+        .button-container {
+            display: flex;
+            gap: 15px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
             border: none;
-            border-radius: 6px;
-            background-color: #28a745;
+            border-radius: 4px;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+        button:active {
+            transform: translateY(1px);
+        }
+        #primaryButton {
+            background-color: #007bff;
             color: white;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s, transform 0.1s;
         }
-        #actionButton:hover {
-            background-color: #1e7e34;
-            transform: translateY(-2px);
+        #primaryButton:hover {
+            background-color: #0056b3;
         }
-        #actionButton:active {
-            transform: translateY(0);
+        #resetButton {
+            background-color: #dc3545;
+            color: white;
+        }
+        #resetButton:hover {
+            background-color: #c82333;
         }
     </style>
 </head>
 <body>
-
-    <button id="actionButton">Click Me</button>
+    <div class="button-container">
+        <button id="primaryButton">Click Me</button>
+        <button id="resetButton">Reset</button>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const button = document.getElementById('actionButton');
+            const primaryButton = document.getElementById('primaryButton');
+            const resetButton = document.getElementById('resetButton');
             
-            // Event listener to change the text when clicked
-            button.addEventListener('click', function() {
-                // Task requirement: change its own text to 'Clicked!'
-                this.textContent = 'Clicked!';
-                this.style.backgroundColor = '#007bff'; // Change color for visual feedback
+            // Store the original text for reliable resetting
+            const ORIGINAL_TEXT = primaryButton.textContent; 
+            let clickCount = 0;
+
+            // 1. Primary Button Functionality (Changes text upon click)
+            primaryButton.addEventListener('click', () => {
+                clickCount++;
+                primaryButton.textContent = `Clicked ${clickCount} time${clickCount !== 1 ? 's' : ''}!`;
+            });
+
+            // 2. Reset Button Functionality (Restores primary button state)
+            resetButton.addEventListener('click', () => {
+                // Reset the displayed text
+                primaryButton.textContent = ORIGINAL_TEXT;
+                
+                // Reset the internal state (counter)
+                clickCount = 0;
             });
         });
     </script>
-
 </body>
 </html>
