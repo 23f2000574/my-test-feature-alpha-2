@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Interaction Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+        #actionButton {
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            border-radius: 6px;
+            background-color: #28a745;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.1s;
+        }
+        #actionButton:hover {
+            background-color: #1e7e34;
+            transform: translateY(-2px);
+        }
+        #actionButton:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <button id="actionButton">Click Me</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const button = document.getElementById('actionButton');
+            
+            // Event listener to change the text when clicked
+            button.addEventListener('click', function() {
+                // Task requirement: change its own text to 'Clicked!'
+                this.textContent = 'Clicked!';
+                this.style.backgroundColor = '#007bff'; // Change color for visual feedback
+            });
+        });
+    </script>
+
+</body>
+</html>
